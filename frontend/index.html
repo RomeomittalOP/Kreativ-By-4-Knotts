@@ -1352,8 +1352,12 @@ window.addEventListener('scroll',()=>{nav.classList.toggle('stuck',scrollY>60);d
     'auth/user-not-found':'No akount with that email. Sign up first.',
     'auth/weak-password':'Password is too weak (min 6 chars).',
     'auth/popup-closed-by-user':'Google sign-in kancelled.',
-    'auth/network-request-failed':'Network error — check your konnection.'
-  }[code]||'Something went wrong. Try again.');
+    'auth/network-request-failed':'Network error — check your konnection.',
+    'auth/configuration-not-found':'Auth not enabled yet — turn on Email/Password in Firebase.',
+    'auth/operation-not-allowed':'This sign-in method is disabled in Firebase.',
+    'auth/unauthorized-domain':'This domain is not authorised in Firebase Auth settings.',
+    'auth/too-many-requests':'Too many attempts — wait a bit and retry.'
+  }[code]||('Something went wrong ('+(code||'unknown')+').'));
 
   const waitAuth=()=>new Promise(res=>{(function p(){window.KAuth?res():setTimeout(p,80);})();});
 
