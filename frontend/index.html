@@ -244,6 +244,25 @@ nav.stuck{background:rgba(5,5,7,.88);backdrop-filter:blur(24px) saturate(180%);b
 .cf-ok.show{display:flex}
 @media(max-width:640px){.price-grid{grid-template-columns:1fr}.cf-row{grid-template-columns:1fr}}
 
+/* ═══════════════════ START PROJECT PAGE ══════════ */
+.startp{position:fixed;inset:0;z-index:1100;background:var(--void);overflow-y:auto;display:none}
+.startp.open{display:block}
+.startp-top{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:18px 40px;background:rgba(5,5,7,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.startp-wrap{max-width:760px;margin:0 auto;padding:48px 40px 90px}
+.startp-h{font-family:var(--disp);font-size:clamp(3rem,7vw,5.5rem);letter-spacing:.02em;color:var(--white);line-height:.9}
+.startp-h em{font-style:normal;color:var(--volt)}
+.startp-sub{font-size:1rem;font-weight:300;color:var(--white2);margin-top:14px;max-width:52ch;line-height:1.6}
+.plan-pick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:34px 0 30px}
+.plan-chip{text-align:left;background:var(--card);border:1px solid var(--line);padding:18px 18px;cursor:none;transition:.25s;position:relative}
+.plan-chip:hover{border-color:var(--lv)}
+.plan-chip.sel{border-color:var(--volt);background:var(--card2)}
+.plan-chip.sel::after{content:"✓";position:absolute;top:12px;right:14px;color:var(--volt);font-size:.8rem}
+.plan-chip .pc-name{font-family:var(--disp);font-size:1.5rem;letter-spacing:.03em;color:var(--white);line-height:1}
+.plan-chip .pc-price{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:var(--volt);margin-top:6px}
+.plan-chip .pc-desc{font-size:.78rem;font-weight:300;color:var(--white2);margin-top:8px;line-height:1.4}
+@media(max-width:640px){.startp-top{padding:16px 20px}.startp-wrap{padding:32px 20px 60px}.plan-pick{grid-template-columns:1fr}}
+
 /* ═══════════════════ NAV LOGIN BTN ═══════════════ */
 .nav-login{font-family:var(--sans);font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
   padding:.62em 1.2em;background:transparent;color:var(--white);border:1px solid rgba(242,242,255,.22);cursor:none;transition:border-color .25s,color .25s,background .25s}
@@ -663,7 +682,7 @@ footer{background:var(--void2);border-top:1px solid var(--line);padding:66px 0 3
     <div class="status-tag"><div class="status-dot"></div><span id="st-txt">Open to projects</span></div>
     <button class="nav-login" type="button" data-auth-open="login">Login</button>
     <button class="nav-login nav-dash" type="button" data-dash-open>Dashboard</button>
-    <a class="nav-cta-btn" href="#contact">Start a project</a>
+    <a class="nav-cta-btn" href="#pricing">Start a project</a>
     <button class="nav-tog" aria-label="Menu">
       <svg width="22" height="22" viewBox="0 0 22 22" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M3 7h16M3 11h16M3 15h16"/></svg>
     </button>
@@ -708,7 +727,7 @@ footer{background:var(--void2);border-top:1px solid var(--line);padding:66px 0 3
   <div class="ss-controls">
     <div class="ss-btns">
       <a class="btn btn--volt" href="https://4knotts-kreativ-next.vercel.app/" target="_blank" rel="noopener"><span class="bb"></span><span class="bi">See our work</span></a>
-      <a class="btn btn--ghost" href="#contact"><span class="bb"></span><span class="bi">Start a project</span></a>
+      <a class="btn btn--ghost" href="#pricing"><span class="bb"></span><span class="bi">Start a project</span></a>
     </div>
     <div class="ss-dots" id="ssDots" aria-hidden="true">
       <button class="ss-dot-btn active" data-go="0"><i></i></button>
@@ -743,7 +762,7 @@ footer{background:var(--void2);border-top:1px solid var(--line);padding:66px 0 3
       </div>
       <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:32px" class="rv d3">
         <a class="btn btn--volt" href="#services"><span class="bb"></span><span class="bi">What we build</span></a>
-        <a class="btn btn--ghost" href="#work"><span class="bb"></span><span class="bi">View work</span></a>
+        <a class="btn btn--ghost" href="#work"><span class="bb"></span><span class="bi">Developing</span></a>
       </div>
     </div>
     <div class="about-vis rv d2">
@@ -807,7 +826,6 @@ footer{background:var(--void2);border-top:1px solid var(--line);padding:66px 0 3
       <div class="svc-name" id="sn1">Web Dev</div>
       <p class="svc-desc">Kustom web applications, fast sites and scalable platforms — built in React, Next.js and headless KMS.</p>
       <div class="svc-tags"><span class="svc-tag">React</span><span class="svc-tag">Next.js</span><span class="svc-tag">Node</span><span class="svc-tag">Webflow</span></div>
-      <a class="svc-arr" href="#">Explore → </a>
     </div>
     <div class="svc rv d1" onmousemove="ib(this,event)">
       <div class="svc-n">02 / 06</div>
@@ -815,7 +833,6 @@ footer{background:var(--void2);border-top:1px solid var(--line);padding:66px 0 3
       <div class="svc-name" id="sn2" style="color:var(--purple2)">AI Dev</div>
       <p class="svc-desc">LLM-powered products, automation, khatbots and intelligent tools — engineered production-ready.</p>
       <div class="svc-tags"><span class="svc-tag">OpenAI</span><span class="svc-tag">Klaude</span><span class="svc-tag">LangChain</span><span class="svc-tag">Python</span></div>
-      <a class="svc-arr" href="#" style="color:var(--purple2)">Explore → </a>
     </div>
     <div class="svc rv d2" onmousemove="ib(this,event)">
       <div class="svc-n">03 / 06</div>
@@ -823,7 +840,6 @@ footer{background:var(--void2);border-top:1px solid var(--line);padding:66px 0 3
       <div class="svc-name" id="sn3">Social</div>
       <p class="svc-desc">Strategy, kontent, kommunity management and paid social — across Instagram, X, LinkedIn, YouTube.</p>
       <div class="svc-tags"><span class="svc-tag">Strategy</span><span class="svc-tag">Kontent</span><span class="svc-tag">Paid Ads</span><span class="svc-tag">Analytics</span></div>
-      <a class="svc-arr" href="#">Explore → </a>
     </div>
     <div class="svc rv" onmousemove="ib(this,event)">
       <div class="svc-n">04 / 06</div>
@@ -831,7 +847,6 @@ footer{background:var(--void2);border-top:1px solid var(--line);padding:66px 0 3
       <div class="svc-name" id="sn4">Strategy</div>
       <p class="svc-desc">Positioning, identity, brand voice and systems — built to own a kategory, not just enter it.</p>
       <div class="svc-tags"><span class="svc-tag">Identity</span><span class="svc-tag">Voice</span><span class="svc-tag">Positioning</span><span class="svc-tag">System</span></div>
-      <a class="svc-arr" href="#">Explore → </a>
     </div>
     <div class="svc rv d1" onmousemove="ib(this,event)">
       <div class="svc-n">05 / 06</div>
@@ -839,7 +854,6 @@ footer{background:var(--void2);border-top:1px solid var(--line);padding:66px 0 3
       <div class="svc-name" id="sn5" style="color:var(--purple2)">Performance</div>
       <p class="svc-desc">SEO, konversion optimisation, analytics and growth marketing — turning traffic into revenue.</p>
       <div class="svc-tags"><span class="svc-tag">SEO</span><span class="svc-tag">KRO</span><span class="svc-tag">GA4</span><span class="svc-tag">A/B</span></div>
-      <a class="svc-arr" href="#" style="color:var(--purple2)">Explore → </a>
     </div>
     <div class="svc rv d2" onmousemove="ib(this,event)">
       <div class="svc-n">06 / 06</div>
@@ -847,7 +861,6 @@ footer{background:var(--void2);border-top:1px solid var(--line);padding:66px 0 3
       <div class="svc-name" id="sn6">Motion</div>
       <p class="svc-desc">Logo animations, reels, explainer films and kampaigns — built for platforms that reward movement.</p>
       <div class="svc-tags"><span class="svc-tag">After FX</span><span class="svc-tag">Reels</span><span class="svc-tag">3D</span><span class="svc-tag">Film</span></div>
-      <a class="svc-arr" href="#">Explore → </a>
     </div>
   </div>
 </section>
@@ -1005,7 +1018,7 @@ footer{background:var(--void2);border-top:1px solid var(--line);padding:66px 0 3
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> 2 revision rounds</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Delivery in ~2 weeks</li>
         </ul>
-        <a class="btn btn--ghost" href="#contact"><span class="bb"></span><span class="bi">Start small</span></a>
+        <button class="btn btn--ghost" type="button" data-start-open data-plan="starter"><span class="bb"></span><span class="bi">Start small</span></button>
       </div>
       <div class="price price--feat">
         <div class="price-badge">Most popular</div>
@@ -1018,7 +1031,7 @@ footer{background:var(--void2);border-top:1px solid var(--line);padding:66px 0 3
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> 1 month social kontent</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Analytics + performance</li>
         </ul>
-        <a class="btn btn--volt" href="#contact"><span class="bb"></span><span class="bi">Start a project</span></a>
+        <button class="btn btn--volt" type="button" data-start-open data-plan="growth"><span class="bb"></span><span class="bi">Start a project</span></button>
       </div>
       <div class="price">
         <div class="price-name">Scale</div>
@@ -1030,7 +1043,7 @@ footer{background:var(--void2);border-top:1px solid var(--line);padding:66px 0 3
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Monthly roadmap</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Priority support SLA</li>
         </ul>
-        <a class="btn btn--ghost" href="#contact"><span class="bb"></span><span class="bi">Talk to us</span></a>
+        <button class="btn btn--ghost" type="button" data-start-open data-plan="scale"><span class="bb"></span><span class="bi">Talk to us</span></button>
       </div>
     </div>
   </div>
@@ -1076,41 +1089,9 @@ footer{background:var(--void2);border-top:1px solid var(--line);padding:66px 0 3
     <div class="cta-h2">LET'S<br><em>KNOTT</em><br>IT.</div>
     <p class="cta-p">A brief, a Figma file, or just a rough idea — send it over. We'll tell you what we kan build and how long it will take. No sales pitch. Just a straight answer.</p>
     <div class="cta-btns">
+      <button class="btn btn--volt" type="button" data-start-open><span class="bb"></span><span class="bi">Start a project</span></button>
       <a class="btn btn--ghost" href="mailto:hello@kreativ.in"><span class="bb"></span><span class="bi">Email us directly</span></a>
-      <a class="btn btn--ghost" href="#services"><span class="bb"></span><span class="bi">Our services</span></a>
     </div>
-
-    <form class="cta-form" id="ctaForm" novalidate>
-      <div class="cf-row">
-        <div class="cf-field">
-          <label for="cfName">Name</label>
-          <input type="text" id="cfName" placeholder="Your name" autocomplete="name"/>
-          <div class="cf-err">Please enter your name.</div>
-        </div>
-        <div class="cf-field">
-          <label for="cfEmail">Email</label>
-          <input type="email" id="cfEmail" placeholder="you@kompany.com" autocomplete="email"/>
-          <div class="cf-err">Enter a valid email.</div>
-        </div>
-      </div>
-      <div class="cf-field">
-        <label for="cfBudget">Budget</label>
-        <select id="cfBudget">
-          <option value="">Select a range</option>
-          <option>Under ₹50k</option>
-          <option>₹50k – ₹1.5L</option>
-          <option>₹1.5L – ₹5L</option>
-          <option>₹5L +</option>
-        </select>
-      </div>
-      <div class="cf-field">
-        <label for="cfBrief">Your brief</label>
-        <textarea id="cfBrief" placeholder="Tell us what you want to build..."></textarea>
-        <div class="cf-err">Add a line or two about your project.</div>
-      </div>
-      <button class="btn btn--volt" type="submit" style="width:100%;justify-content:center"><span class="bb"></span><span class="bi">Send the brief</span></button>
-      <div class="cf-ok" id="cfOk"><span>✓</span> <span id="cfOkTxt">Brief sent (demo) — backend pending</span></div>
-    </form>
   </div>
 </section>
 
@@ -1142,6 +1123,69 @@ footer{background:var(--void2);border-top:1px solid var(--line);padding:66px 0 3
     </div>
   </div>
 </footer>
+
+<!-- ══ START A PROJECT PAGE (separate) ═════════════ -->
+<div class="startp" id="startPage">
+  <div class="startp-top">
+    <div class="dash-brand">
+      <span class="k-icon"><svg viewBox="0 0 36 36"><use href="#k-mark"/></svg></span>
+      <span><b>KREATIV</b><small>Start a projekt</small></span>
+    </div>
+    <button class="dash-btn" type="button" id="startClose">Back to site</button>
+  </div>
+  <div class="startp-wrap">
+    <div class="startp-h">LET'S <em>KNOTT</em> IT.</div>
+    <p class="startp-sub">Pick a plan and tell us about your project. A brief, a Figma file, or just a rough idea — we'll reply with what we kan build and a timeline. No sales pitch.</p>
+
+    <div class="plan-pick" id="planPick">
+      <button class="plan-chip" type="button" data-plan="starter">
+        <div class="pc-name">Starter</div><div class="pc-price">₹65k / projekt</div>
+        <div class="pc-desc">Landing site or one focused build.</div>
+      </button>
+      <button class="plan-chip" type="button" data-plan="growth">
+        <div class="pc-name">Growth</div><div class="pc-price">₹1.5L / projekt</div>
+        <div class="pc-desc">Full web build + brand & social.</div>
+      </button>
+      <button class="plan-chip" type="button" data-plan="scale">
+        <div class="pc-name">Scale</div><div class="pc-price">Kustom / retainer</div>
+        <div class="pc-desc">AI products & ongoing partnership.</div>
+      </button>
+    </div>
+
+    <form class="cta-form" id="ctaForm" novalidate style="max-width:none;margin:0">
+      <div class="cf-row">
+        <div class="cf-field">
+          <label for="cfName">Name</label>
+          <input type="text" id="cfName" placeholder="Your name" autocomplete="name"/>
+          <div class="cf-err">Please enter your name.</div>
+        </div>
+        <div class="cf-field">
+          <label for="cfEmail">Email</label>
+          <input type="email" id="cfEmail" placeholder="you@kompany.com" autocomplete="email"/>
+          <div class="cf-err">Enter a valid email.</div>
+        </div>
+      </div>
+      <div class="cf-field">
+        <label for="cfBudget">Budget</label>
+        <select id="cfBudget">
+          <option value="">Select a range</option>
+          <option>Under ₹65k</option>
+          <option>₹65k – ₹1.5L</option>
+          <option>₹1.5L – ₹5L</option>
+          <option>₹5L – ₹15L</option>
+          <option>₹15L+ / Custom retainer</option>
+        </select>
+      </div>
+      <div class="cf-field">
+        <label for="cfBrief">Your brief</label>
+        <textarea id="cfBrief" placeholder="Tell us what you want to build..."></textarea>
+        <div class="cf-err">Add a line or two about your project.</div>
+      </div>
+      <button class="btn btn--volt" type="submit" style="width:100%;justify-content:center"><span class="bb"></span><span class="bi">Send the brief</span></button>
+      <div class="cf-ok" id="cfOk"><span>✓</span> <span id="cfOkTxt">Brief sent (demo) — backend pending</span></div>
+    </form>
+  </div>
+</div>
 
 <!-- ══ CLIENT DASHBOARD ════════════════════════════ -->
 <div class="dash" id="dash">
@@ -1431,6 +1475,35 @@ window.addEventListener('scroll',()=>{nav.classList.toggle('stuck',scrollY>60);d
     if(bad)return;
     ok.classList.add('show');form.querySelector('button[type=submit]').disabled=true;
   });
+})();
+
+/* ── START A PROJECT PAGE ────────────────────── */
+(function(){
+  const page=document.getElementById('startPage');if(!page)return;
+  const chips=[...page.querySelectorAll('.plan-chip')];
+  const budget=document.getElementById('cfBudget');
+  const budgetByPlan={starter:'Under ₹65k',growth:'₹1.5L – ₹5L',scale:'₹15L+ / Custom retainer'};
+  function selectPlan(plan){
+    if(!plan)return;
+    chips.forEach(c=>c.classList.toggle('sel',c.dataset.plan===plan));
+    if(budget&&budgetByPlan[plan])budget.value=budgetByPlan[plan];
+  }
+  function open(plan){
+    selectPlan(plan);
+    page.classList.add('open');document.body.style.overflow='hidden';page.scrollTop=0;
+    if(location.hash!=='#start')history.replaceState(null,'','#start');
+    setTimeout(()=>document.getElementById('cfName')?.focus(),300);
+  }
+  function close(){
+    page.classList.remove('open');document.body.style.overflow='';
+    if(location.hash==='#start')history.replaceState(null,'',location.pathname+location.search);
+  }
+  document.querySelectorAll('[data-start-open]').forEach(b=>b.addEventListener('click',()=>open(b.dataset.plan)));
+  chips.forEach(c=>c.addEventListener('click',()=>selectPlan(c.dataset.plan)));
+  document.getElementById('startClose')?.addEventListener('click',close);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&page.classList.contains('open'))close();});
+  // open if landing directly on #start
+  if(location.hash==='#start')open('growth');
 })();
 
 /* ── HERO SLIDESHOW ──────────────────────────── */
