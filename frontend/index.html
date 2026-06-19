@@ -409,6 +409,10 @@ body.logged-in .nav-login:not(.nav-dash){display:none}
 .dstat .dn em{font-style:normal;color:var(--volt)}
 .dstat .dl{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--white3);margin-top:6px}
 .dash-h4{font-family:var(--mono);font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--volt);margin:40px 0 16px}
+.dash-empty{border:1px dashed var(--line);background:var(--card);padding:60px 30px;text-align:center}
+.dash-empty svg{width:42px;height:42px;color:var(--white3);margin:0 auto 18px}
+.dash-empty h3{font-family:var(--disp);font-size:1.9rem;font-weight:600;letter-spacing:-.01em;color:var(--white);margin-bottom:10px}
+.dash-empty p{font-size:.95rem;font-weight:300;color:var(--white2);max-width:44ch;margin:0 auto;line-height:1.65}
 .proj{background:var(--card);border:1px solid var(--line);padding:26px 28px;margin-bottom:2px;transition:background .3s}
 .proj:hover{background:var(--card2)}
 .proj-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -1263,59 +1267,19 @@ footer{background:var(--void2);border-top:1px solid var(--line);padding:66px 0 3
   </div>
   <div class="dash-wrap">
     <div class="dash-hi">Welcome back, <em id="dashName">there</em>.</div>
-    <p class="dash-sub">Here's where your projects stand today.</p>
+    <p class="dash-sub">Your project workspace.</p>
 
     <div class="dash-stats">
-      <div class="dstat"><div class="dn"><em>2</em></div><div class="dl">Active projects</div></div>
-      <div class="dstat"><div class="dn">1</div><div class="dl">In review</div></div>
-      <div class="dstat"><div class="dn">4</div><div class="dl">Delivered</div></div>
+      <div class="dstat"><div class="dn">0</div><div class="dl">Active projects</div></div>
+      <div class="dstat"><div class="dn">0</div><div class="dl">In review</div></div>
+      <div class="dstat"><div class="dn">0</div><div class="dl">Delivered</div></div>
     </div>
 
     <div class="dash-h4">Your projects</div>
-
-    <div class="proj">
-      <div class="proj-top">
-        <div><div class="proj-name">Website Rebuild</div><div class="proj-cat">Web Development · Next.js</div></div>
-        <div class="proj-due">Due<b>28 Jun 2026</b></div>
-      </div>
-      <div class="proj-steps">
-        <div class="pstep done"><div class="pbar"></div><div class="pl">Brief</div></div>
-        <div class="pstep done"><div class="pbar"></div><div class="pl">Design</div></div>
-        <div class="pstep active"><div class="pbar"></div><div class="pl">Build</div></div>
-        <div class="pstep"><div class="pbar"></div><div class="pl">Deliver</div></div>
-      </div>
-      <div class="proj-prog"><div class="ptrack"><div class="pfill" style="width:68%"></div></div><div class="ppct">68%</div></div>
-      <div class="proj-note"><span class="nd"></span> Frontend in development — staging link coming this week.</div>
-    </div>
-
-    <div class="proj">
-      <div class="proj-top">
-        <div><div class="proj-name">AI Support Bot</div><div class="proj-cat">AI Development · RAG</div></div>
-        <div class="proj-due">Due<b>15 Jul 2026</b></div>
-      </div>
-      <div class="proj-steps">
-        <div class="pstep done"><div class="pbar"></div><div class="pl">Brief</div></div>
-        <div class="pstep active"><div class="pbar"></div><div class="pl">Design</div></div>
-        <div class="pstep"><div class="pbar"></div><div class="pl">Build</div></div>
-        <div class="pstep"><div class="pbar"></div><div class="pl">Deliver</div></div>
-      </div>
-      <div class="proj-prog"><div class="ptrack"><div class="pfill" style="width:34%"></div></div><div class="ppct">34%</div></div>
-      <div class="proj-note"><span class="nd"></span> Data pipeline scoped — awaiting your knowledge-base docs.</div>
-    </div>
-
-    <div class="proj">
-      <div class="proj-top">
-        <div><div class="proj-name">Brand & Social Launch</div><div class="proj-cat">Strategy · Social</div></div>
-        <div class="proj-due">In review<b>Your feedback</b></div>
-      </div>
-      <div class="proj-steps">
-        <div class="pstep done"><div class="pbar"></div><div class="pl">Brief</div></div>
-        <div class="pstep done"><div class="pbar"></div><div class="pl">Design</div></div>
-        <div class="pstep done"><div class="pbar"></div><div class="pl">Build</div></div>
-        <div class="pstep active"><div class="pbar"></div><div class="pl">Deliver</div></div>
-      </div>
-      <div class="proj-prog"><div class="ptrack"><div class="pfill" style="width:92%"></div></div><div class="ppct">92%</div></div>
-      <div class="proj-note"><span class="nd"></span> Final deck shared — approve to schedule the launch.</div>
+    <div class="dash-empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+      <h3>No projects yet</h3>
+      <p>Once we kick off a project together, every stage — brief, design, build, deliver — will show up here in real time.</p>
     </div>
   </div>
 </div>
@@ -1550,23 +1514,48 @@ window.addEventListener('scroll',()=>{nav.classList.toggle('stuck',scrollY>60);d
   });
 })();
 
-/* ── CONTACT FORM ────────────────────────────── */
+/* ── CONTACT / BRIEF FORM (-> backend: MongoDB + email) ── */
 (function(){
   const form=document.getElementById('ctaForm');if(!form)return;
-  const ok=document.getElementById('cfOk');
+  const ok=document.getElementById('cfOk'),okTxt=document.getElementById('cfOkTxt');
+  const submitBtn=form.querySelector('button[type=submit]');
+  // Backend API base. Replace BACKEND with your deployed URL (e.g. Render/Railway).
+  const BACKEND="https://kreativ-api.onrender.com";
+  const isLocal=['localhost','127.0.0.1'].includes(location.hostname);
+  const API_BASE=isLocal?"http://localhost:5000":BACKEND;
   const mark=(id,bad)=>document.getElementById(id).closest('.cf-field').classList.toggle('err',bad);
-  form.addEventListener('submit',e=>{
+  const mailtoFallback=(name,email,message)=>{
+    const body=encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+    window.location.href=`mailto:hello@kreativ.in?subject=${encodeURIComponent('New project brief — '+name)}&body=${body}`;
+  };
+  form.addEventListener('submit',async e=>{
     e.preventDefault();
     form.querySelectorAll('.cf-field').forEach(f=>f.classList.remove('err'));
     const name=document.getElementById('cfName').value.trim();
     const email=document.getElementById('cfEmail').value.trim();
     const brief=document.getElementById('cfBrief').value.trim();
+    const budget=document.getElementById('cfBudget').value||'Not specified';
+    const plan=(document.querySelector('.plan-chip.sel .pc-name')||{}).textContent||'Not selected';
     let bad=false;
     if(!name){mark('cfName',1);bad=true;}
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){mark('cfEmail',1);bad=true;}
     if(brief.length<6){mark('cfBrief',1);bad=true;}
     if(bad)return;
-    ok.classList.add('show');form.querySelector('button[type=submit]').disabled=true;
+    const message=`Plan: ${plan} | Budget: ${budget}\n\n${brief}`;
+    submitBtn.disabled=true;okTxt.textContent='Sending your brief…';ok.classList.add('show');
+    try{
+      const res=await fetch(`${API_BASE}/api/contact`,{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name,email,message})
+      });
+      if(!res.ok)throw new Error('bad status '+res.status);
+      okTxt.textContent='Brief received — check your inbox for a confirmation.';
+    }catch(err){
+      // backend unreachable -> fall back to email so the brief still reaches us
+      okTxt.textContent='Opening your email app to send the brief…';
+      mailtoFallback(name,email,message);
+      submitBtn.disabled=false;
+    }
   });
 })();
 
