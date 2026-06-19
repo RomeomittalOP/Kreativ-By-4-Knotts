@@ -291,6 +291,37 @@ nav.stuck{background:var(--navbg);backdrop-filter:blur(24px) saturate(180%);bord
 .plan-chip .pc-desc{font-size:.78rem;font-weight:300;color:var(--white2);margin-top:8px;line-height:1.4}
 @media(max-width:640px){.startp-top{padding:16px 20px}.startp-wrap{padding:32px 20px 60px}.plan-pick{grid-template-columns:1fr}}
 
+/* ═══════════════════ DEV (IN DEVELOPMENT) MODAL ══ */
+.dev-ov{position:fixed;inset:0;z-index:1200;display:none;align-items:center;justify-content:center;padding:24px;
+  background:radial-gradient(circle at 50% 50%,rgba(30,0,0,.6),rgba(3,3,5,.95));backdrop-filter:blur(10px);overflow:hidden}
+.dev-ov.open{display:flex;animation:devIn .35s var(--e)}
+@keyframes devIn{from{opacity:0}to{opacity:1}}
+.dev-ov::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,38,38,.04) 3px,transparent 4px);
+  animation:devScan 7s linear infinite}
+@keyframes devScan{to{background-position:0 400px}}
+.dev-ov::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(transparent 0,rgba(255,38,38,.05) 50%,transparent 100%);height:40%;animation:devSweep 3.5s ease-in-out infinite}
+@keyframes devSweep{0%{transform:translateY(-120%)}100%{transform:translateY(320%)}}
+.dev-inner{position:relative;z-index:2;text-align:center;max-width:760px;animation:devFlick .12s steps(2) 3}
+@keyframes devFlick{50%{opacity:.6}}
+.dev-code{font-family:var(--mono);font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;color:var(--volt);margin-bottom:24px;
+  display:inline-flex;align-items:center;gap:10px;border:1px solid var(--lv);padding:.5em 1.1em;background:rgba(255,38,38,.06)}
+.dev-code::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--volt);animation:blink 1s steps(1) infinite}
+.dev-glitch{position:relative;font-family:var(--disp);font-weight:600;font-size:clamp(2.6rem,10vw,7.5rem);line-height:.92;letter-spacing:-.03em;color:#fff;text-transform:uppercase}
+.dev-glitch::before,.dev-glitch::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;height:100%;overflow:hidden}
+.dev-glitch::before{color:#ff2626;clip-path:inset(0 0 58% 0);animation:devGT 2.2s infinite linear alternate-reverse}
+.dev-glitch::after{color:#2bd4ff;clip-path:inset(56% 0 0 0);animation:devGB 1.7s infinite linear alternate-reverse}
+@keyframes devGT{0%{transform:translate(-2px,0)}25%{transform:translate(3px,-1px)}50%{transform:translate(-3px,1px)}75%{transform:translate(2px,0)}100%{transform:translate(-1px,0)}}
+@keyframes devGB{0%{transform:translate(2px,0)}25%{transform:translate(-3px,1px)}50%{transform:translate(3px,-1px)}75%{transform:translate(-2px,0)}100%{transform:translate(1px,0)}}
+.dev-proj{font-family:var(--mono);font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:var(--white2);margin-top:22px}
+.dev-sub{font-size:1rem;font-weight:300;color:var(--white2);margin-top:14px;line-height:1.6;max-width:46ch;margin-left:auto;margin-right:auto}
+.dev-btn{margin-top:34px;font-family:var(--sans);font-size:.8rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:.95em 2.4em;background:var(--volt);color:#fff;border:none;cursor:none;position:relative;overflow:hidden;transition:transform .2s var(--e),background .25s}
+.dev-btn:hover{background:var(--volt2);transform:translateY(-2px)}
+.dev-hint{margin-top:16px;font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--white3)}
+.wi{cursor:none}
+
 /* ═══════════════════ THEME TOGGLE ════════════════ */
 .theme-tog{background:none;border:1px solid var(--line);color:var(--white2);width:38px;height:34px;display:flex;align-items:center;justify-content:center;cursor:none;transition:border-color .25s,color .25s}
 .theme-tog:hover{border-color:var(--volt);color:var(--volt)}
@@ -1141,6 +1172,18 @@ footer{background:var(--void2);border-top:1px solid var(--line);padding:66px 0 3
   </div>
 </footer>
 
+<!-- ══ IN DEVELOPMENT (futuristic error popup) ═════ -->
+<div class="dev-ov" id="devModal" role="dialog" aria-modal="true" aria-label="In development">
+  <div class="dev-inner">
+    <div class="dev-code">System · access denied</div>
+    <div class="dev-glitch" data-text="IN DEVELOPMENT" id="devTitle">IN DEVELOPMENT</div>
+    <div class="dev-proj" id="devProj">KNOTTIX</div>
+    <p class="dev-sub">This module is still being engineered in the lab. We're not ready to show it just yet.</p>
+    <button class="dev-btn" type="button" id="devClose">Keep exploring</button>
+    <div class="dev-hint">[ ESC / click anywhere to close ]</div>
+  </div>
+</div>
+
 <!-- ══ START A PROJECT PAGE (separate) ═════════════ -->
 <div class="startp" id="startPage">
   <div class="startp-top">
@@ -1472,6 +1515,26 @@ window.addEventListener('scroll',()=>{nav.classList.toggle('stuck',scrollY>60);d
     root.setAttribute('data-theme',next);
     try{localStorage.setItem('kreativ_theme',next);}catch(e){}
   }));
+})();
+
+/* ── IN DEVELOPMENT POPUP ────────────────────── */
+(function(){
+  const ov=document.getElementById('devModal');if(!ov)return;
+  const proj=document.getElementById('devProj');
+  const open=name=>{if(proj&&name)proj.textContent=name;ov.classList.add('open');document.body.style.overflow='hidden';};
+  const close=()=>{ov.classList.remove('open');document.body.style.overflow='';};
+  const wt=document.getElementById('wt');
+  if(wt){
+    wt.querySelectorAll('.wi').forEach(card=>{
+      let dx=0,dy=0,moved=false;
+      card.addEventListener('mousedown',e=>{dx=e.clientX;dy=e.clientY;moved=false;});
+      card.addEventListener('mousemove',e=>{if(Math.abs(e.clientX-dx)>6||Math.abs(e.clientY-dy)>6)moved=true;});
+      card.addEventListener('click',()=>{if(moved)return;open(card.querySelector('.wi-title')?.textContent||'Module');});
+    });
+  }
+  document.getElementById('devClose')?.addEventListener('click',close);
+  ov.addEventListener('mousedown',e=>{if(e.target===ov)close();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ov.classList.contains('open'))close();});
 })();
 
 /* ── FAQ ACCORDION ───────────────────────────── */
