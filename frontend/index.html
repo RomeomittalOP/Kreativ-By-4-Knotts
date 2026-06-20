@@ -696,12 +696,21 @@ body.logged-in .mnav-login{display:none}
   /* declutter nav-right on mobile — actions move into the menu */
   nav .status-tag,nav .nav-login,nav .nav-dash,nav .nav-cta-btn{display:none}
   .nav-right{gap:10px}
+  /* process: drop sticky so heading doesn't overlap the steps when stacked */
+  .proc-sticky{position:static;top:auto}
+  .proc-grid{gap:36px}
+  /* stats band: smaller numbers + padding so nothing overflows */
+  .stat{padding:18px 14px}
+  .stat-n{font-size:clamp(2.6rem,7vw,4rem)}
+  .stat:nth-child(2n){border-right:none}
 }
 @media(max-width:640px){
   .wrap{padding:0 20px}
   .svc-grid,.tc-grid{grid-template-columns:1fr}
   .plat-grid{grid-template-columns:repeat(2,1fr)}
   .stats-grid{grid-template-columns:1fr 1fr}
+  .stat-n{font-size:clamp(2.2rem,9vw,3rem);word-break:break-word}
+  .stat-l{font-size:.52rem}
   nav{padding:0 20px;height:60px}
   .hero-metrics{flex-direction:column;gap:18px}
   .hero-met{border-right:none;border-bottom:1px solid var(--line);padding:14px 0;text-align:left}
