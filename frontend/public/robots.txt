@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kreativby4knotts.com/sitemap.xml
