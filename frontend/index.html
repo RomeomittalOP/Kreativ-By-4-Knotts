@@ -1630,10 +1630,8 @@ window.addEventListener('scroll',()=>{nav.classList.toggle('stuck',scrollY>60);d
   const form=document.getElementById('ctaForm');if(!form)return;
   const ok=document.getElementById('cfOk'),okTxt=document.getElementById('cfOkTxt');
   const submitBtn=form.querySelector('button[type=submit]');
-  // Backend API base. Replace BACKEND with your deployed URL (e.g. Render/Railway).
-  const BACKEND="https://kreativ-api.onrender.com";
-  const isLocal=['localhost','127.0.0.1'].includes(location.hostname);
-  const API_BASE=isLocal?"http://localhost:5000":BACKEND;
+  // Same-origin Vercel serverless function (frontend/api/contact.js) → MongoDB + email
+  const API_BASE="";
   const mark=(id,bad)=>document.getElementById(id).closest('.cf-field').classList.toggle('err',bad);
   const mailtoFallback=(name,email,message)=>{
     const body=encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
